@@ -1,3 +1,7 @@
+const HDWalletProvider = require('@truffle/hdwallet-provider');
+const fs = require('fs');
+const mnemonic = fs.readFileSync(".secret").toString().trim();
+
 /**
  * Use this file to configure your truffle project. It's seeded with some
  * common settings for different networks and features like migrations,
@@ -61,6 +65,13 @@ module.exports = {
      port: 7545,            // Standard Ethereum port (default: none)
      network_id: "*",       // Any network (default: none)
     },
+      matic: {
+          provider: () => new HDWalletProvider(mnemonic, `https://rpc-mumbai.maticvigil.com`),
+          network_id: 80001,
+          confirmations: 2,
+          timeoutBlocks: 200,
+          skipDryRun: true
+      },
     //
     // An additional network, but with some advanced options…
     // advanced: {
